@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyDeath : MonoBehaviour
 {
-    public string Enemies;
+    public string Stick;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class EnemyDeath : MonoBehaviour
     }
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == Enemies)
+        if (col.gameObject.tag == Stick)
         {
             Destroy(gameObject);
             Debug.Log("Enemy dead!");

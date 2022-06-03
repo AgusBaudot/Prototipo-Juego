@@ -15,12 +15,13 @@ public class UsrMovement : MonoBehaviour
     float currJumps;
 
     //SpawnPoints
-    public Transform SpawnPoint;
-    public GameObject Player;
+    //Conseguir la posicion original del player en el start, cada vez que muere teletransportarlo hacia la posicion original
+    private Transform InitialPos;
     private UsrMovement script;
     // Start is called before the first frame update
     void Start()
     {
+        InitialPos = gameObject.transform.position;
         currJumps = jumpAmount;
         RB = GetComponent<Rigidbody>();
         script = GetComponent<UsrMovement>();
@@ -52,18 +53,14 @@ public class UsrMovement : MonoBehaviour
             RB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             currJumps--;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //Mostrar la hitbox del palo.
-        }
     }
     void OnCollisionEnter (Collision col)
     {
         if (col.gameObject.tag == enemies)
         {
-            Destroy(gameObject);
             Instantiate(gameObject, new Vector3(0, 0.5f, 0), Quaternion.identity);
             script.enabled = true;
+            Destroy(gameObject);
         }
         currJumps = jumpAmount;
     }
