@@ -4,28 +4,33 @@ using UnityEngine;
 
 public class UsrMovement : MonoBehaviour
 {
+    //Speed of movement
     public float Speed = 0.1f;
     public float rotationSpeed = 3;
 
+    //Health bar
+    public int HP = 3;
+
+    //Enemy tag
     public string enemies;
 
+    //Jumps
     Rigidbody RB;
     public float jumpForce;
     public float jumpAmount;
     float currJumps;
 
     //SpawnPoints
-    //Conseguir la posicion original del player en el start, cada vez que muere teletransportarlo hacia la posicion original
-    private Transform InitialPos;
-    private UsrMovement script;
+    private Vector3 InitialPos;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-        InitialPos = gameObject.transform.position;
+        InitialPos = player.transform.position;
+        //InitialPos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
         currJumps = jumpAmount;
         RB = GetComponent<Rigidbody>();
-        script = GetComponent<UsrMovement>();
-        script.enabled = true;
+        Debug.Log("Current health:" + HP);
     }
 
     // Update is called once per frame
@@ -58,9 +63,17 @@ public class UsrMovement : MonoBehaviour
     {
         if (col.gameObject.tag == enemies)
         {
-            Instantiate(gameObject, new Vector3(0, 0.5f, 0), Quaternion.identity);
-            script.enabled = true;
-            Destroy(gameObject);
+            if (HP > 1)
+            {
+            transform.position = InitialPos;
+            HP--;
+            Debug.Log("Life lost! Current health:" + HP);
+            }
+            else
+            {
+                Debug.Log("You Died");
+                Destroy(gameObject);
+            }
         }
         currJumps = jumpAmount;
     }

@@ -21,8 +21,8 @@ public class EnemyDeath : MonoBehaviour
     {
         if (col.gameObject.tag == Stick)
         {
+            Debug.Log("Enemy died!");
             Destroy(gameObject);
-            Debug.Log("Enemy dead!");
         }
     }
 }
