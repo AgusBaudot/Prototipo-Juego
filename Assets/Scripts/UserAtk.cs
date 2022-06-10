@@ -5,14 +5,19 @@ using UnityEngine;
 public class UserAtk : MonoBehaviour
 {
     public GameObject Weapon;
-    private float CD;
+    private float CDAtk;
     private float NextAtk;
+
+    private float CDVanish;
+    private float TotalCDVanish = 2;
+    
     // Start is called before the first frame update
     void Start()
     {
         Weapon.SetActive(false);
-        CD = 1;
+        CDAtk = 1;
         NextAtk = 0;
+        CDVanish = TotalCDVanish;
     }
 
     // Update is called once per frame
@@ -20,25 +25,62 @@ public class UserAtk : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (NextAtk < Time.time)
+            if (Weapon.activeSelf == false && NextAtk <= Time.time)
             {
-                if (Weapon.activeSelf == false)
-                {
-                    Weapon.SetActive(true);
-                }
-                else
-                {
-                    Weapon.SetActive(false);
-                    NextAtk = CD + Time.time;
-                    Debug.Log("Attack used, Cooldown started");
-                }
-            
-            }
-            else
+                Attack();
+            } else if (Weapon.activeSelf == true || NextAtk > Time.time)
             {
-                Debug.Log("CD didn't finish");
+                Debug.Log("CD is active, wait!");
             }
         }
+        if (CDVanish <= Time.time)
+        {
+            Weapon.SetActive(false);
+            NextAtk = CDAtk + Time.time;
+        }
+    }
+    void Attack ()
+    {
+        Weapon.SetActive(true);
+        CDVanish = Time.time + TotalCDVanish;
     }
 
 }
+
+/*
+if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (Weapon.activeSelf)
+            {
+                CDVanish -= Time.deltaTime;
+                if (CDVanish <= 0)
+                {
+                    Weapon.SetActive(false);
+                    CDVanish = TotalCDVanish;
+                }
+            }
+        }
+        if (!Weapon.activeSelf)
+        {
+            CD -= Time.deltaTime;
+        }
+if(NextAtk <= Time.time)
+        {
+            if (!Weapon.activeSelf)
+            {
+                Weapon.SetActive(true);
+                //pasan unos segundos.
+                //se desactiva.
+            }
+            else
+            {
+                NextAtk = CD + Time.time;
+                Debug.Log("Attack used, Cooldown started");
+                Weapon.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.Log("CD didn't finish");
+        }
+*/
