@@ -8,6 +8,8 @@ public class UserAtk : MonoBehaviour
     private float CDAtk;
     private float NextAtk;
 
+    private bool CanAtk = true;
+
     private float CDVanish;
     private float TotalCDVanish = 2;
     
@@ -16,7 +18,6 @@ public class UserAtk : MonoBehaviour
     {
         Weapon.SetActive(false);
         CDAtk = 1;
-        NextAtk = 0;
         CDVanish = TotalCDVanish;
     }
 
@@ -25,24 +26,40 @@ public class UserAtk : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Weapon.activeSelf == false && NextAtk <= Time.time)
+            if (Weapon.activeSelf == false && CanAtk == true)
             {
                 Attack();
-            } else if (Weapon.activeSelf == true || NextAtk > Time.time)
+            } else if (Weapon.activeSelf == true || CanAtk == false)
             {
                 Debug.Log("CD is active, wait!");
             }
         }
-        if (CDVanish <= Time.time)
+        if (CDVanish <= 0)
         {
+            if (Weapon.activeSelf == true)
+            {
             Weapon.SetActive(false);
-            NextAtk = CDAtk + Time.time;
+            NextAtk = 0;
+            NextAtk = CDAtk;
+            CanAtk = false;
+            Debug.Log("Attack used, CD started");
+            }
+            NextAtk -= Time.deltaTime;
+        }
+        if (CDVanish > 0)
+        {
+            CDVanish -= Time.deltaTime;
+        }
+        if (NextAtk <= 0)
+        {
+            CanAtk = true;
         }
     }
     void Attack ()
     {
         Weapon.SetActive(true);
-        CDVanish = Time.time + TotalCDVanish;
+        CDVanish = 0;
+        CDVanish = TotalCDVanish;
     }
 
 }
