@@ -17,7 +17,7 @@ public class EnemyDeath : MonoBehaviour
     {
         
     }
-    void OnCollisionEnter(Collision col)
+    public void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == Stick)
         {

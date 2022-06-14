@@ -7,7 +7,7 @@ public class EnemySpawn : MonoBehaviour
     public GameObject Enemy;
     public Transform[] SpawnPoint;
     private float NextSpawn;
-    public float CDSpawn = 2f;
+    public float CDSpawn = 1.5f;
 
     // Start is called before the first frame update
     void Start()
