@@ -58,6 +58,18 @@ public class UsrMovement : MonoBehaviour
             RB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             currJumps--;
         }
+        if (HP == 3)
+        {
+            //mostrar 3 vidas.
+        }
+        if (HP == 2)
+        {
+            //mostrar dos vidas, ocultar la n°3
+        }
+        if (HP == 1)
+        {
+            //mostrar una vida, ocultar n°2 y n°3
+        }
     }
     void OnCollisionEnter (Collision col)
     {
@@ -65,9 +77,9 @@ public class UsrMovement : MonoBehaviour
         {
             if (HP > 1)
             {
-            transform.position = InitialPos;
-            HP--;
-            Debug.Log("Life lost! Current health:" + HP);
+                transform.position = InitialPos;
+                HP--;
+                Debug.Log("Life lost! Current health:" + HP);
             }
             else
             {
