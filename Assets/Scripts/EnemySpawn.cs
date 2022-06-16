@@ -18,7 +18,7 @@ public class EnemySpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (NextSpawn <= Time.time)
+        if (NextSpawn <= Time.time && GameObject.Find("Player") != null)
         {
             int n = Random.Range(0, SpawnPoint.Length);
             Instantiate(Enemy, SpawnPoint[n].transform.position, SpawnPoint[n].transform.rotation);

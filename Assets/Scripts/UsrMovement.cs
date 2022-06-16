@@ -23,6 +23,18 @@ public class UsrMovement : MonoBehaviour
     //SpawnPoints
     private Vector3 InitialPos;
     public GameObject player;
+
+    // UI
+    public Transform life1;
+    public Transform life2;
+    public Transform life3;
+
+    private SpriteRenderer life1vis;
+    private SpriteRenderer life2vis;
+    private SpriteRenderer life3vis;
+
+    //Black Out
+    public GameObject Blackout;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +43,10 @@ public class UsrMovement : MonoBehaviour
         currJumps = jumpAmount;
         RB = GetComponent<Rigidbody>();
         Debug.Log("Current health:" + HP);
+        life1vis = life1.GetComponent<SpriteRenderer>();
+        life2vis = life2.GetComponent<SpriteRenderer>();
+        life3vis = life3.GetComponent<SpriteRenderer>();
+        Blackout.SetActive(false);
     }
 
     // Update is called once per frame
@@ -60,15 +76,27 @@ public class UsrMovement : MonoBehaviour
         }
         if (HP == 3)
         {
-            //mostrar 3 vidas.
+            life1vis.enabled = true;
+            life2vis.enabled = true;
+            life3vis.enabled = true;
         }
         if (HP == 2)
         {
-            //mostrar dos vidas, ocultar la n°3
+            life1vis.enabled = true;
+            life2vis.enabled = true;
+            life3vis.enabled = false;
         }
         if (HP == 1)
         {
-            //mostrar una vida, ocultar n°2 y n°3
+            life1vis.enabled = true;
+            life2vis.enabled = false;
+            life3vis.enabled = false;
+        }
+        if (HP == 0)
+        {
+            life1vis.enabled = false;
+            life2vis.enabled = false;
+            life3vis.enabled = false;
         }
     }
     void OnCollisionEnter (Collision col)
@@ -84,6 +112,7 @@ public class UsrMovement : MonoBehaviour
             else
             {
                 Debug.Log("You Died");
+                Blackout.SetActive(true);
                 Destroy(gameObject);
             }
         }
