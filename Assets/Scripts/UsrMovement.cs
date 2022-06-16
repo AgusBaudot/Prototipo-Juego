@@ -35,6 +35,8 @@ public class UsrMovement : MonoBehaviour
 
     //Black Out
     public GameObject Blackout;
+
+    public bool Died = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -98,6 +100,14 @@ public class UsrMovement : MonoBehaviour
             life2vis.enabled = false;
             life3vis.enabled = false;
         }
+        if (Died)
+        {
+            Debug.Log("Died is true");
+        }
+    }
+    void FixedUpdate()
+    {
+        Died = false;
     }
     void OnCollisionEnter (Collision col)
     {
@@ -108,6 +118,7 @@ public class UsrMovement : MonoBehaviour
                 transform.position = InitialPos;
                 HP--;
                 Debug.Log("Life lost! Current health:" + HP);
+                Died = true;
             }
             else
             {
