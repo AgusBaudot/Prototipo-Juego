@@ -11,7 +11,32 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Espada
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gris
+    second: {fileID: 2100000, guid: 85eb24b32f307cf4f81428debb36778b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gris birlloso
+    second: {fileID: 2100000, guid: bc65846f18bf997469c9f2f420fabed8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Marron
+    second: {fileID: 2100000, guid: 636d5892b6c6d0941a4d0dbabc57319d, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: paleta gris
+    second: {fileID: 2800000, guid: 72e8310488da4994589af38082249231, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: paleta marron
+    second: {fileID: 2800000, guid: e351610b6e1ab6547a0c1b2b26f98af7, type: 3}
   materials:
     importMaterials: 1
     materialName: 0
